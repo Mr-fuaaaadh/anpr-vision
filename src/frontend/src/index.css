@@ -1,0 +1,245 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("/assets/fonts/PlusJakartaSans.woff2") format("woff2");
+  font-weight: 300 700;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --radius: 0.875rem;
+
+    /* Light mode */
+    --background: 0.97 0.01 250;
+    --foreground: 0.18 0.04 245;
+    --card: 1 0 0;
+    --card-foreground: 0.18 0.04 245;
+    --popover: 1 0 0;
+    --popover-foreground: 0.18 0.04 245;
+    --primary: 0.6 0.19 260;
+    --primary-foreground: 1 0 0;
+    --secondary: 0.94 0.02 250;
+    --secondary-foreground: 0.18 0.04 245;
+    --muted: 0.94 0.015 250;
+    --muted-foreground: 0.56 0.04 250;
+    --accent: 0.94 0.02 250;
+    --accent-foreground: 0.18 0.04 245;
+    --destructive: 0.63 0.22 27;
+    --destructive-foreground: 1 0 0;
+    --border: 0.88 0.02 250;
+    --input: 0.88 0.02 250;
+    --ring: 0.6 0.19 260;
+    --chart-1: 0.6 0.19 260;
+    --chart-2: 0.73 0.19 145;
+    --chart-3: 0.63 0.22 27;
+    --chart-4: 0.75 0.18 70;
+    --chart-5: 0.65 0.18 300;
+    --sidebar: 0.98 0.01 250;
+    --sidebar-foreground: 0.18 0.04 245;
+    --sidebar-primary: 0.6 0.19 260;
+    --sidebar-primary-foreground: 1 0 0;
+    --sidebar-accent: 0.94 0.02 250;
+    --sidebar-accent-foreground: 0.18 0.04 245;
+    --sidebar-border: 0.88 0.02 250;
+    --sidebar-ring: 0.6 0.19 260;
+
+    /* Custom tokens */
+    --surface: 0.99 0 0;
+    --surface-elevated: 1 0 0;
+    --anpr-blue: 0.6 0.19 260;
+    --anpr-green: 0.73 0.19 145;
+    --anpr-red: 0.63 0.22 27;
+    --anpr-orange: 0.75 0.18 70;
+  }
+
+  .dark {
+    /* Dark theme - ANPR Vision palette */
+    --background: 0.11 0.03 245;
+    --foreground: 0.94 0.02 250;
+    --card: 0.15 0.04 245;
+    --card-foreground: 0.94 0.02 250;
+    --popover: 0.17 0.04 245;
+    --popover-foreground: 0.94 0.02 250;
+    --primary: 0.62 0.19 260;
+    --primary-foreground: 0.98 0 0;
+    --secondary: 0.2 0.05 245;
+    --secondary-foreground: 0.94 0.02 250;
+    --muted: 0.2 0.04 245;
+    --muted-foreground: 0.58 0.04 250;
+    --accent: 0.22 0.05 245;
+    --accent-foreground: 0.94 0.02 250;
+    --destructive: 0.63 0.22 27;
+    --destructive-foreground: 0.98 0 0;
+    --border: 1 0 0 / 9%;
+    --input: 1 0 0 / 12%;
+    --ring: 0.62 0.19 260;
+    --chart-1: 0.62 0.19 260;
+    --chart-2: 0.73 0.19 145;
+    --chart-3: 0.63 0.22 27;
+    --chart-4: 0.75 0.18 70;
+    --chart-5: 0.65 0.18 300;
+    --sidebar: 0.1 0.025 245;
+    --sidebar-foreground: 0.94 0.02 250;
+    --sidebar-primary: 0.62 0.19 260;
+    --sidebar-primary-foreground: 0.98 0 0;
+    --sidebar-accent: 0.18 0.04 245;
+    --sidebar-accent-foreground: 0.94 0.02 250;
+    --sidebar-border: 1 0 0 / 8%;
+    --sidebar-ring: 0.62 0.19 260;
+
+    --surface: 0.13 0.035 245;
+    --surface-elevated: 0.17 0.045 245;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    color-scheme: dark;
+  }
+
+  html.light {
+    color-scheme: light;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Plus Jakarta Sans", "Inter", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: oklch(var(--muted-foreground) / 30%);
+    border-radius: 999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: oklch(var(--muted-foreground) / 50%);
+  }
+}
+
+@layer components {
+  .glass-card {
+    background: oklch(var(--card) / 35%);
+    border: 1px solid oklch(var(--border));
+    backdrop-filter: blur(12px);
+    box-shadow: 0 12px 30px oklch(0 0 0 / 35%), inset 0 1px 0 oklch(1 0 0 / 6%);
+  }
+
+  .glass-card-solid {
+    background: oklch(var(--card));
+    border: 1px solid oklch(var(--border));
+    box-shadow: 0 4px 20px oklch(0 0 0 / 25%), inset 0 1px 0 oklch(1 0 0 / 5%);
+  }
+
+  .status-dot-online {
+    @apply w-2 h-2 rounded-full bg-green-400 shadow-[0_0_6px_theme(colors.green.400)];
+    animation: pulse-glow 2s infinite;
+  }
+
+  .status-dot-offline {
+    @apply w-2 h-2 rounded-full bg-red-500;
+  }
+
+  .status-dot-recording {
+    @apply w-2 h-2 rounded-full bg-orange-400 shadow-[0_0_6px_theme(colors.orange.400)];
+    animation: pulse-glow 1s infinite;
+  }
+
+  .nav-item {
+    @apply flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200;
+    color: oklch(var(--muted-foreground));
+  }
+
+  .nav-item:hover {
+    color: oklch(var(--foreground));
+    background: oklch(var(--accent));
+  }
+
+  .nav-item.active {
+    color: oklch(var(--primary));
+    background: oklch(var(--primary) / 12%);
+  }
+
+  .page-enter {
+    animation: page-fade-in 0.25s ease-out;
+  }
+
+  .skeleton {
+    background: linear-gradient(
+      90deg,
+      oklch(var(--muted)) 25%,
+      oklch(var(--accent)) 50%,
+      oklch(var(--muted)) 75%
+    );
+    background-size: 200% 100%;
+    animation: skeleton-wave 1.5s infinite;
+  }
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes page-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes skeleton-wave {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@keyframes blink-plate {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+.plate-blink {
+  animation: blink-plate 1.5s ease-in-out infinite;
+}
+
+.anpr-glow {
+  box-shadow: 0 0 20px oklch(var(--primary) / 20%), 0 0 60px
+    oklch(var(--primary) / 8%);
+}
+
+.camera-tile-overlay {
+  background: linear-gradient(to top, oklch(0 0 0 / 70%) 0%, transparent 60%);
+}
